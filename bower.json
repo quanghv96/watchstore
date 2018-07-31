@@ -1,0 +1,21 @@
+{
+  "name": "watchstore",
+  "description": "",
+  "main": "",
+  "authors": [
+    "quanghv96 <quanghavan96@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/quanghv96/watchstore",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "library": "https://github.com/quanghv96/library.git"
+  }
+}
