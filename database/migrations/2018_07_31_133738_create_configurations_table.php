@@ -20,7 +20,7 @@ class CreateConfigurationsTable extends Migration
             $table->string('screen', 128);
             $table->string('os', 128);
             $table->string('back_camera', 100);
-            $table->string('font_camera', 100);
+            $table->string('front_camera', 100);
             $table->string('ram', 100);
             $table->string('memory', 100);
             $table->string('battery_capacity', 100);
