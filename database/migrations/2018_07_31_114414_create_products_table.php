@@ -24,6 +24,7 @@ class CreateProductsTable extends Migration
             $table->string('avatar', 100);
             $table->integer('view')->default(0);
             $table->string('warranty', 50);
+            $table->integer('status')->unsigned();
             $table->timestamps();
         });
     }
