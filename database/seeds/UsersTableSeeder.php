@@ -11,18 +11,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
-        DB::transaction(function() {
-            factory(App\Address::class, 1)->create([
-                'address' => 'Ninh Bình',
-            ])->each(function($u) {
-                $u->users()->save(factory(App\User::class)->make([
-                    'name' => 'Hà Văn Quang',
-                    'email' => 'quanghavan96@gmail.com',
-                    'phone' => '01638161533',
-                    'level' => 1,                    
-                ]));
-            }        
-        });
+        $admin = [
+            'name' => 'Hà Văn Quang',
+            'email' => 'quanghavan96@gmail.com',
+            'phone' => '01638161533',
+            'level' => 1, 
+            'password' => bcrypt('123456'),
+            'remember_token' => str_random(10),
+            'address_id' => 37, 
+        ];
+        DB::table('users')->insert($admin);
     }
 }
