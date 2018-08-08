@@ -2,6 +2,10 @@
 
 return [
 
+    'per_page' => 5,
+    'newsUrl' => 'upload/news',
+    'slideUrl' => 'upload/slide',
+    'imageUrl' => 'upload/image',
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -124,7 +128,6 @@ return [
     'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
-    'per_page' => 5,
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -167,6 +170,8 @@ return [
         willvincent\Rateable\RateableServiceProvider::class,
         // laravel colective
         Collective\Html\HtmlServiceProvider::class,
+        // ckeditor
+        Unisharp\Ckeditor\ServiceProvider::class,
 
         /*
          * Package Service Providers...
