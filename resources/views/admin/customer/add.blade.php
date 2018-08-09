@@ -50,7 +50,7 @@
                             <span class="req">*</span>
                         </label>
                         <div class="formRight">
-                            {!! Form::select('address_id', $addresses, null) !!}
+                            {!! Form::select('address_id', $addresses, null, ['class' => 'address']) !!}
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -86,4 +86,8 @@
         {!! Form::close() !!}
     </div>
     <div class="clear mt30"></div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="{{ asset('source/bower_components/library/backend/js/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('source/bower_components/library/backend/js/add-select2.js') }}"></script>
 @endsection

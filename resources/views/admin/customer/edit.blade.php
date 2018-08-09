@@ -50,7 +50,7 @@
                             <span class="req">*</span>
                         </label>
                         <div class="formRight">
-                            {!! Form::select('address_id', $addresses, "$customer->address_id") !!}
+                            {!! Form::select('address_id', $addresses, "$customer->address_id", ['class' => 'address']) !!}
                         </div>
                         <div class="clear"></div>
                     </div>
@@ -83,4 +83,8 @@
         <p class="col-sm-offset-4 note"><b>{{ __('Chú ý') }}</b> : <i>{{ __('Nếu bạn không thay đổi mật khẩu thì không cần phải nhập vào') }}</i></p>
     </div>
     <div class="clear mt30"></div>
+@endsection
+@section('script')
+    <script type="text/javascript" src="{{ asset('source/bower_components/library/backend/js/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('source/bower_components/library/backend/js/add-select2.js') }}"></script>
 @endsection

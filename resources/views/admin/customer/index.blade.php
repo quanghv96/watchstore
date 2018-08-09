@@ -51,7 +51,7 @@
                     <td colspan="7">
                         <div class="list_action itemActions">
                             <a href="{{ route('customer.delMulCus')}}" id="delMul" class="button blueB del">
-                                <span>{{ __('Xóa hết') }}</span>
+                                <span>{{ __('Xóa') }}</span>
                             </a>
                         </div>
                     </td>
