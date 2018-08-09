@@ -26,7 +26,6 @@ class CustomerUpdateRequest extends FormRequest
         return [
             'name' => 'required',
             'phone' => 'required',
-            'email' => 'required|email|unique:users,email,' . $this->segment(3),
             'password' => 'nullable|min:6',
             're_password' => 'same:password'
         ];
@@ -37,9 +36,6 @@ class CustomerUpdateRequest extends FormRequest
         return [
             'name.required' => __('Bạn chưa nhập tên'),
             'phone.required' => __('Bạn chưa nhập số điện thoại'),
-            'email.required' => __('Bạn chưa nhập email'),
-            'email.email' => __('Email bạn nhập không hợp lệ'),
-            'email.unique' => __('Email đã được sử dụng rồi'),
             'password.min' => __('Mật khẩu tối thiểu 6 ký tự'),
             're_password.same' => __('Mật khẩu không khớp'),
         ];

@@ -20,6 +20,9 @@ Route::group(['namespace' => 'Site'], function () {
     Route::get('category/{id}/index.html', 'CategoryController@index')->name('site.category.index');
     Route::get('index.html', 'HomeController@index')->name('site.home.index');
     Route::get('product/{id}/view.html', 'ProductController@view')->name('product.view');
+    Route::group([], function () {
+        Route::resource('customer', 'CustomerController', ['as' => 'site', 'except' => 'destroy']);
+    });
 });
 
 // route for admin
@@ -38,14 +41,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_login', 'namespace' =>
         Route::post('customer/delete.html', 'CustomerController@delete')->name('customer.delete');
         Route::post('customer/deleteMulCus.html', 'CustomerController@delMulCustomer')->name('customer.delMulCus');
         Route::get('customer-restore.html', 'CustomerController@restore')->name('customer.restore');
-
     });
     
     Route::group([], function () {
         Route::resource('news', 'NewsController', ['except' => 'destroy']);
         Route::post('news/{id}/delete.html', 'NewsController@delete')->name('news.delete');
         Route::post('news/deleteMulNews.html', 'NewsController@delMulNews')->name('news.delMulNews');
-
     });
 
     Route::group(['prefix' => 'contact'], function () {

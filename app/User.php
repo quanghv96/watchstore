@@ -49,5 +49,4 @@ class User extends Authenticatable
     {
         return $query->where('level', $role);
     }
-
 }
