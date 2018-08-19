@@ -3,6 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <base href="{{ asset('') }}">
     <title>{{ trans('common.head.trang_quan_tri') }}</title>
 
     <meta name="robots" content="noindex, nofollow" />

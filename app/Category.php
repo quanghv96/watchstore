@@ -25,4 +25,13 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id');
     }
+
+    public function scopeGetSubCategory($query, $id)
+    {
+        return $query->where('parent_id', $id);
+    }
+    public function scopeGetSubCategoryId($query)
+    {
+        return $query->where('parent_id', $id)->pluck('id');
+    }
 }

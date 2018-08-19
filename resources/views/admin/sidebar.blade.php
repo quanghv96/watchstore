@@ -11,7 +11,7 @@
         <!-- Left navigation -->
         <ul id="menu" class="nav">
             <li class="home">
-                <a href="" class="active" id="current">
+                <a href="{{ route('home.index') }}" class="active" id="current">
                     <span>{{ trans('common.layout.bang_dieu_kien') }}</span>
                     <strong></strong>
                 </a>
@@ -19,17 +19,12 @@
             <li class="tran">
                 <a href="" class=" exp" >
                     <span>{{ trans('common.sidebar.qlbh') }}</span>
-                    <strong>{{ trans('common.sidebar.qlbh_nb') }}</strong>
+                    <strong>{{ __('1') }}</strong>
                 </a>
                 <ul class="sub">
                     <li >
-                        <a href="">
-                            {{ trans('common.sidebar.qlgd') }}
-                        </a>
-                    </li>
-                    <li >
-                        <a href="">
-                            {{ trans('common.sidebar.dhsp') }}
+                        <a href="{{ route('order.index') }}">
+                            {{ __('Quản lý đơn hàng') }}
                         </a>
                     </li>
                 </ul>

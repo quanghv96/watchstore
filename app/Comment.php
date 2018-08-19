@@ -15,11 +15,26 @@ class Comment extends Model
     //
     public function user() 
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(User::class);
     }
     //
     public function replies()
     {
         return $this->hasMany(Comment::class, 'parent_id');
+    }
+
+    public function scopeGetReply($query, $id)
+    {
+        return $query->where('parent_id', $id);
+    }
+
+    public function scopeGetReplyId($query, $id)
+    {
+        return $query->where('parent_id', $id)->pluck($id);
+    }
+
+    public function scopeGetComment($query)
+    {
+        return $query->where('parent_id', 0);
     }
 }

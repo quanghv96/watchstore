@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Schema;
 use App\Category;
 use Illuminate\Support\Facades\View;
 use App\Product;
+use Cart;
+use Illuminate\Support\Facades\Auth;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,9 +22,13 @@ class AppServiceProvider extends ServiceProvider
         //
         Schema::defaultStringLength(191);
         $category = Category::all();
-        $product_sell = Product::has('orderDetails')->get();
-        View::share('category', $category);
-        View::share('product_sell', $product_sell);
+        $product_sell = Product::getTopSell();
+        View::share(compact(
+            [
+                'category', 
+                'product_sell',
+            ]
+        ));
     }
 
     /**

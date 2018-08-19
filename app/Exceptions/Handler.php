@@ -48,6 +48,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if (strpos($request->url(), 'admin') > 0) {
+            return response()->view('admin.404', [], 404);
+        }
+        
         return parent::render($request, $exception);
     }
 }

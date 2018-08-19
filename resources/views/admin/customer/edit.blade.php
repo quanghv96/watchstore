@@ -29,7 +29,7 @@
                         </label>
                         <div class="formRight">
                             <span class="oneTwo">
-                                {!! Form::email('email', $customer->email, ['required', 'autocomplete' => 'off']) !!}
+                                {!! Form::email('email', $customer->email, ['disabled', 'autocomplete' => 'off']) !!}
                             </span>
                         </div>
                         <div class="clear"></div>

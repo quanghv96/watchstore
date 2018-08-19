@@ -10,18 +10,57 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
 // route for site
 Route::group(['namespace' => 'Site'], function () {
+    
     Route::get('category/{id}/index.html', 'CategoryController@index')->name('site.category.index');
     Route::get('index.html', 'HomeController@index')->name('site.home.index');
+    Route::get('search', 'HomeController@search')->name('site.home.search');
+    Route::get('seggest', 'HomeController@seggest')->name('site.home.seggest');
     Route::get('product/{id}/view.html', 'ProductController@view')->name('product.view');
+    Route::post('check-login.html', 'HomeController@checkLogIn')->name('site.home.check_login');
+    Route::post('order/add.html', 'OrderController@add')->name('site.order.add');
+    Route::post('order/check-order.html', 'OrderController@checkOrder')->name('site.order.check');
     Route::group([], function () {
+        Route::get('customer/login.html', 'CustomerController@logIn')->name('site.customer.login');
+        Route::post('customer/login.html', 'CustomerController@postLogIn');
+        Route::post('customer/check-login.html', 'CustomerController@checkLogIn')->name('site.customer.check_login');
+        Route::post('customer/review.html', 'CustomerController@review')->name('site.customer.review');
+        Route::get('customer/logout.html', 'CustomerController@logOut')->name('site.customer.logout');
+        Route::get('customer/regester.html', 'CustomerController@regester')->name('site.customer.regester');
         Route::resource('customer', 'CustomerController', ['as' => 'site', 'except' => 'destroy']);
+    });
+    Route::group(['prefix' => 'contact'], function () {
+        Route::get('index.html', 'ContactController@index')->name('site.contact.index');
+        Route::post('index.html', 'ContactController@store')->name('site.contact.create');
+    });
+    Route::group(['prefix' => 'news'], function () {
+        Route::get('index.html', 'NewsController@index')->name('site.news.index');
+        Route::get('{id}/chi-tiet.html', 'NewsController@view')->name('site.news.view');
+        Route::get('search', 'NewsController@search')->name('site.news.search');
+    });
+    Route::group(['prefix' => 'comment'], function () {
+        Route::post('/store', 'CommentController@store')->name('comment.add');
+        Route::post('/reply/store', 'CommentController@replyStore')->name('reply.add');
+    });
+    Route::group(['prefix' => 'cart'], function () {
+        Route::post('add-to-compare.html', 'CartController@addToCompare')->name('site.cart.add_to_compare');
+        Route::post('delete-product-compare.html', 'CartController@deleteProductCompare')->name('site.cart.delete_product_compare');
+        Route::get('view-to-wishlist.html', 'CartController@viewWishList')->name('site.cart.view_to_wishlist');
+        Route::post('add-to-wishlist.html', 'CartController@addToWishList')->name('site.cart.add_to_wishlist');
+        Route::post('delete-product-wishlist.html', 'CartController@removeWishList')->name('site.cart.delete_product_wishlist');
+        Route::get('view-to-compare.html', 'CartController@viewToCompare')->name('site.cart.view_to_compare');
+        Route::get('view.html', 'CartController@index')->name('site.cart.view');
+        Route::get('checkout.html', 'CartController@checkOut')->name('site.cart.checkout');
+        Route::post('add.html', 'CartController@add')->name('site.cart.add');
+        Route::post('add-to-cart.html', 'CartController@addToCart')->name('site.cart.add_to_cart');
+        Route::post('delete.html', 'CartController@delete')->name('site.cart.delete');
+        Route::post('update.html', 'CartController@update')->name('site.cart.update');
     });
 });
 
@@ -34,6 +73,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_login', 'namespace' =>
         Route::get('index.html', 'AdminController@index')->name('admin.index');
         Route::get('{id}/edit.html', 'AdminController@edit')->name('admin.edit');
         Route::post('{id}/update.html', 'AdminController@update')->name('admin.update');
+    });
+
+    Route::group(['prefix' => 'order'], function () {
+        Route::post('export-to-excel.html', 'OrderController@exportToExcel')->name('order.export_to_excel');
+        Route::get('index.html', 'OrderController@index')->name('order.index');
+        Route::get('{id}/chi-tiet.html', 'OrderController@detail')->name('order.detail');
+        Route::post('delete.html', 'OrderController@delete')->name('order.delete');
+        Route::post('confirm-order.html', 'OrderController@confirmOrder')->name('order.confirm_order');
+        Route::post('deleteOrderDetail.html', 'OrderController@deleteOrderDetail')->name('order.deleteOrderDetail');
     });
 
     Route::group([], function () {
@@ -57,6 +105,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_login', 'namespace' =>
 
     Route::group(['prefix' => 'comment'], function () {
         Route::get('index.html', 'CommentController@index')->name('comment.index');
+        Route::get('{id}/chi-tiet.html', 'CommentController@view')->name('comment.view');
+        Route::post('delete-reply.html', 'CommentController@deleteReply')->name('comment.delMulRep');
+        Route::post('delete-comment.html', 'CommentController@delete')->name('comment.delMulCom');
     });
 
     Route::group([], function () {
@@ -80,3 +131,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin_login', 'namespace' =>
 });
 Route::get('admin/login.html', 'Admin\AdminController@getLogin');
 Route::post('admin/login.html', 'Admin\AdminController@postLogin');
+Route::any('{all}', function(Request $request) {
+    if (strpos($request->url(), 'admin') > 0) {
+        return view('admin.404');
+    }
+
+    return view('site.404');
+})->where('all', '.*');

@@ -3,9 +3,11 @@
 return [
 
     'per_page' => 5,
+    'news' => 2,
     'newsUrl' => 'upload/news',
     'slideUrl' => 'upload/slide',
     'imageUrl' => 'upload/image',
+    'slide_page' => 4,
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -172,6 +174,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         // ckeditor
         Unisharp\Ckeditor\ServiceProvider::class,
+        // excel
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -237,7 +241,8 @@ return [
         // laravel colective
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        //excel
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
